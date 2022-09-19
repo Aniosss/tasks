@@ -1,25 +1,17 @@
 package ru.vsu.cs.rodionovri;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> powers = new ArrayList<Integer>();
-        int n = 10978; // something > 0
-        int power = 0;
-        while (n != 0) {
-            if ((n & 1) != 0) {
-                powers.add(1 << power);
-                // or, if you just need the exponents:
-                // powers.add(power);
-            }
-            ++power;
-            n >>>= 1;
-        }
+        System.out.println(MatrixFibonacci.get_number(input()));
+    }
 
-        for(int i : powers){
-            System.out.println(i);
-        }
+    private static int input(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of Fibonacci: N = ");
+        int n = scanner.nextInt();
+        return n;
     }
 }

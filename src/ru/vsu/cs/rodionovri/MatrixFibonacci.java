@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MatrixFibonacci {
     static int[][] Q = new int[][]{{1, 1}, {1, 0}};
-    static HashMap<Integer, int[][]> memory = new HashMap<Integer, int[][]>() {
+    static HashMap<Integer, int[][]> memory = new HashMap<>() {
     };
 
     private static int[][] multiply_matrices(int[][] M1, int[][] M2) {
@@ -25,8 +25,8 @@ public class MatrixFibonacci {
         return r;
     }
 
-    private static List<Integer> decompToPowersTwo(int number) {
-        List<Integer> powers = new ArrayList<Integer>();
+    private static List<Integer> decampToPowersTwo(int number) {
+        List<Integer> powers = new ArrayList<>();
         int power = 0;
         while (number != 0) {
             if ((number & 1) != 0) {
@@ -38,14 +38,22 @@ public class MatrixFibonacci {
         return powers;
     }
 
-    private static int get_number(int number) {
+    public static int get_number(int number) {
         if (number == 0) return 0;
         if (number == 1) return 1;
 
-        List<Integer> powersOfNumbers = decompToPowersTwo(number);
-        int[][][] matrices = new int[][][]{};
-        for (int i = 0; i < powersOfNumbers.size(); ++i){
+        List<Integer> powersOfNumbers = decampToPowersTwo(number);
+        Stack<int[][]> matrices = new Stack<>(){};
 
+        for (Integer powerOfNumber : powersOfNumbers) {
+            matrices.add(get_matrix_power(Q, powerOfNumber));
         }
+        while (matrices.size() > 1){
+            int[][] M1 = matrices.pop();
+            int[][] M2 = matrices.pop();
+            int[][] R = multiply_matrices(M1,M2);
+            matrices.add(R);
+        }
+        return matrices.get(0)[0][0];
     }
 }
