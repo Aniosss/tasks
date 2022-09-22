@@ -9,7 +9,7 @@ public class Main {
         int cnt = 1;
         int cur_first_space = 0;
         int mem_cnt = 1;
-        int cur_count = 0;
+        int cur_count;
         boolean flag = false;
         for (int i = 0; i < h + 2; ++i) {
             if (i == 0 || i == h + 1) {
